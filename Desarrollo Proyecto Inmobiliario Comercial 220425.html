@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coldwell Banker Commercial</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #002e5d;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 4px solid #ccc;
+        }
+        section {
+            padding: 40px 20px;
+            background-color: white;
+            margin: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #002e5d;
+        }
+        .accordion {
+            margin: 20px 0;
+        }
+        .accordion-item {
+            background-color: #f8f8f8;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        .accordion-item button {
+            background-color: #002e5d;
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            text-align: left;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .accordion-item-content {
+            display: none;
+            padding: 15px;
+            background-color: white;
+            border-top: 1px solid #ccc;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        form input, form select, form textarea {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+        form button {
+            background-color: #002e5d;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Coldwell Banker Commercial</h1>
+        <p>Bienes raíces comerciales</p>
+    </header>
+
+    <section id="quienes">
+        <h2>¿Quiénes somos?</h2>
+        <p>Somos una inmobiliaria comercial moderna que combina tecnología y experiencia para conectar empresarios con las mejores propiedades. Nos especializamos en ofrecer soluciones personalizadas que optimicen el tiempo, el presupuesto y el éxito de nuestros clientes.</p>
+    </section>
+
+    <section id="mision-vision">
+        <h2>Misión</h2>
+        <p>Brindar atención personalizada a cada cliente o empresa para ayudarles a encontrar con éxito la mejor opción inmobiliaria comercial adaptada a sus necesidades.</p>
+        <h2>Visión</h2>
+        <p>Ser la inmobiliaria comercial líder en experiencia de servicio, asegurando procesos eficientes, confiables y ventajosos para cada cliente.</p>
+    </section>
+
+    <section id="especialidades">
+        <h2>Especialidades</h2>
+        <div class="accordion">
+            <div class="accordion-item">
+                <button onclick="toggleAccordion(this)">🏢 Oficinas</button>
+                <div class="accordion-item-content">
+                    <p>Ofrecemos espacios corporativos y oficinas en venta o renta ideales para empresas modernas, con ubicaciones estratégicas y servicios integrales.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button onclick="toggleAccordion(this)">🏭 Industrial</button>
+                <div class="accordion-item-content">
+                    <p>Amplia oferta de naves industriales y bodegas para logística, manufactura o almacenamiento, en zonas industriales clave.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button onclick="toggleAccordion(this)">🌱 Terrenos</button>
+                <div class="accordion-item-content">
+                    <p>Terrenos en venta o renta para desarrollos comerciales o industriales, con opciones urbanas y suburbanas bien conectadas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="agenda">
+        <h2>Agenda tu cita</h2>
+        <form id="formulario">
+            <input type="text" name="nombre" placeholder="Nombre completo" required>
+            <input type="text" name="empresa" placeholder="Nombre de la empresa (opcional)">
+            <input type="tel" name="telefono" placeholder="Teléfono" required>
+            <input type="email" name="correo" placeholder="Correo electrónico" required>
+            <input type="number" name="m2" placeholder="Requerimiento en m²" required>
+            <select name="especialidad" required>
+                <option value="">Selecciona especialidad</option>
+                <option value="Oficinas">Oficinas</option>
+                <option value="Industrial">Industrial</option>
+                <option value="Terrenos">Terrenos</option>
+            </select>
+            <input type="text" name="zona" placeholder="Zona de interés">
+            <input type="date" name="fecha" required>
+            <input type="time" name="hora" required>
+            <textarea name="comentarios" rows="4" placeholder="Comentarios adicionales"></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+        <div class="success-message" id="mensaje">
+            <p>Tu información se ha enviado exitosamente.<br>Gracias por confiar en Coldwell Banker Commercial.<br>Tu cita ha sido agendada.<br>En breve un agente se pondrá en contacto contigo.</p>
+        </div>
+    </section>
+
+    <script>
+        function toggleAccordion(button) {
+            const content = button.nextElementSibling;
+            content.style.display = content.style.display === 'block' ? 'none' : 'block';
+        }
+
+        document.getElementById('formulario').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const datos = new FormData(form);
+
+            await fetch("https://script.google.com/macros/s/AKfycbzjgj7FQCjAm6Js1d_wZzV69fvs-Qci4ETRx6vv8zW9wTGSVh5Bo1TIX4ccWabG06Uc/exec", {
+                method: "POST",
+                body: datos
+            });
+
+            const mensaje = document.getElementById('mensaje');
+            mensaje.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            form.reset();
+
+            setTimeout(() => {
+                mensaje.style.display = 'none';
+                location.href = "#quienes";
+            }, 10000);
+        });
+    </script>
+</body>
+</html>
